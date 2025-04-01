@@ -74,21 +74,23 @@ jobs:
           ref: ${{ github.ref }}
 
       - name: Compile Code
-        run: make
-        timeout-minutes: 2
+        run: make re
+        timeout-minutes: 3
 
       - name: Clean Compilation Files
         run: make clean
 
       - name: Verify Executables
         run: |
-          IFS=',' read -r -a executables <<< "${{ env.EXECUTABLES }}"
-          for exe in "${executables[@]}"; do
-            if [ ! -x "$exe" ]; then
-              echo "Error: $exe not found or not executable."
-              exit 1
-            fi
+          echo "${{ env.EXECUTABLES }}" | while IFS=',' read -r -a executables; do
+            for exe in "${executables[@]}"; do
+                if [ ! -x "$exe" ]; then
+                    echo "Error: $exe not found or not executable."
+                    exit 1
+                fi
+            done
           done
+
 
   run_tests:
     needs: check_program_compilation
