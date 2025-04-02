@@ -18,23 +18,23 @@ CFLAGS		=   --coverage
 LDLIBS		=   -lcriterion
 
 all:            fclean $(NAME)
-                ./$(NAME)
+				./$(NAME)
 
 $(NAME):        $(OBJ)
-                $(CC) -o $(NAME) $(OBJ) $(LDLIBS) $(CFLAGS) -lcriterion -lgcov
+				$(CC) -o $(NAME) $(OBJ) $(LDLIBS) $(CFLAGS) -lcriterion -lgcov
 
 tests_run:      $(NAME)
-                ./$(NAME)
+				./$(NAME)
 
 coverage:
 	@gcovr
 
 clean:
-                rm -f $(OBJ)
-                rm -f *.gc*
+				rm -f $(OBJ)
+				rm -f *.gc*
 
 fclean:         clean
-                rm -f $(NAME)
+				rm -f $(NAME)
 
 re:             fclean all
 
