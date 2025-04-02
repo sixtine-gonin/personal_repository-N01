@@ -10,7 +10,7 @@ SRC     =       src/init.c \
                 src/event.c \
                 src/render.c \
                 src/cleanup.c \
-				src/my_revstr.c\
+                src/my_revstr.c \
                 src/main.c
 
 OBJ     =       $(SRC:.c=.o)
@@ -31,6 +31,9 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+
+tests_run:
+	make -C tests tests_run
 
 re:     fclean all
 
