@@ -5,37 +5,36 @@
 ## test
 ##
 
-CC       	=   gcc
+CC          = gcc
 
-SRC     	=   test.c
+SRC         = test.c
 
-OBJ			=   $(SRC:.c=.o)
+OBJ         = $(SRC:.c=.o)
 
-NAME		=   unit_tests
+NAME        = unit_tests
 
-CFLAGS		=   --coverage
+CFLAGS      = --coverage -Wall -Wextra -I./include
 
-LDLIBS		=   -lcriterion
+LDLIBS      = -lcriterion -lgcov
 
-all:            fclean $(NAME)
-				./$(NAME)
+all: fclean $(NAME)
 
-$(NAME):        $(OBJ)
-				$(CC) -o $(NAME) $(OBJ) $(LDLIBS) $(CFLAGS) -lcriterion -lgcov
+$(NAME): $(OBJ)
+	$(CC) -o $(NAME) $(OBJ) $(LDLIBS) $(CFLAGS)
 
-tests_run:      $(NAME)
-				./$(NAME)
+tests_run: $(NAME)
+	./$(NAME)
 
 coverage:
 	@gcovr
 
 clean:
-				rm -f $(OBJ)
-				rm -f *.gc*
+	rm -f $(OBJ)
+	rm -f *.gc*
 
-fclean:         clean
-				rm -f $(NAME)
+fclean: clean
+	rm -f $(NAME)
 
-re:             fclean all
+re: fclean all
 
-.PHONY:         $(NAME) all clean fclean re tests_run
+.PHONY: $(NAME) all clean fclean re tests_run
