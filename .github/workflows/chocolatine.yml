@@ -94,7 +94,6 @@ jobs:
   push_to_mirror:
     needs: check_program_compilation
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
